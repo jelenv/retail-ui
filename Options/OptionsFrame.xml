@@ -1,0 +1,123 @@
+<Ui>
+
+<Frame enableKeyboard="true" enableMouse="true" hidden="true" movable="true" name="RUIOptionsFrame" parent="UIParent">
+  <Size>
+    <AbsDimension x="450" y="510"/>
+  </Size>
+  <Anchors>
+    <Anchor point="CENTER"/>
+  </Anchors>
+  <Scripts>
+    <OnLoad>
+      -- Allows frame to be closed on escape
+      tinsert(UISpecialFrames, self:GetName());
+
+      -- Allows frame to be dragable on left click
+      self:RegisterForDrag("LeftButton")
+      self:SetScript("OnDragStart", RUIOptionsFrame.StartMoving)
+      self:SetScript("OnDragStop", RUIOptionsFrame.StopMovingOrSizing)
+
+      Mixin(self, BackdropTemplateMixin)
+      self:SetBackdrop({
+        bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background", 
+        edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
+        tile = true,
+        tileSize = 32,
+        edgeSize = 32,
+        insets = {left = 11, right = 12, top = 10, bottom = 11},
+      })
+    </OnLoad>
+    <OnShow>
+      -- Sound: GAMEDIALOGOPEN
+      PlaySound(88)
+      -- Ensure the frame is darkened if dark theme is active
+      RetailUI:DarkTheme_Update()
+    </OnShow>
+    <OnHide>
+      PlaySound(89) --GAMEDIALOGCLOSE
+    </OnHide>
+  </Scripts>
+  <TitleRegion setAllPoints="true"/>
+  <Layers>
+    <Layer level="ARTWORK">
+      <Texture file="Interface\DialogFrame\UI-DialogBox-Header" name="$parentHeader">
+        <Size>
+          <AbsDimension x="300" y="68"/>
+        </Size>
+        <Anchors>
+          <Anchor point="TOP">
+            <Offset>
+              <AbsDimension x="0" y="12"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+      </Texture>
+      <FontString text="Retail UI" inherits="GameFontNormal" name="$parentHeaderText">
+        <Anchors>
+          <Anchor point="TOP" relativeTo="$parentHeader">
+            <Offset>
+              <AbsDimension x="0" y="-15"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+      </FontString>
+    </Layer>
+  </Layers>
+  <Frames>
+    <!-- Close button -->
+    <Button inherits="UIPanelButtonTemplate" name="$parentClose" text="Close">
+      <Size>
+        <AbsDimension x="96" y="22"/>
+      </Size>
+      <Anchors>
+        <Anchor point="BOTTOMRIGHT">
+          <Offset>
+            <AbsDimension x="-16" y="14"/>
+          </Offset>
+        </Anchor>
+      </Anchors>
+      <Scripts>
+        <OnClick>
+          self:GetParent():Hide()
+          -- Sound: GAMEGENERICBUTTONPRESS
+          PlaySound(624)
+        </OnClick>
+      </Scripts>
+    </Button>
+
+    <Frame name="$parentPanelContainer">
+      <Anchors>
+        <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+          <Offset>
+            <AbsDimension x="22" y="-40"/>
+          </Offset>
+        </Anchor>
+        <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent">
+          <Offset>
+            <AbsDimension x="22" y="50"/>
+          </Offset>
+        </Anchor>
+        <Anchor point="RIGHT">
+          <Offset>
+            <AbsDimension x="-22" y="0"/>
+          </Offset>
+        </Anchor>
+      </Anchors>
+      <Scripts>
+        <OnLoad>
+          Mixin(self, BackdropTemplateMixin)
+          self:SetBackdrop({
+            edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
+            tile = true,
+            tileSize = 16,
+            edgeSize = 16,
+            insets = {left = 5, right = 5, top = 5, bottom = 5},
+          })
+          self:SetBackdropBorderColor(.6,.6,.6,1)
+        </OnLoad>
+      </Scripts>
+    </Frame>
+  </Frames>
+</Frame>
+
+</Ui>

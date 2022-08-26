@@ -1,0 +1,558 @@
+<Ui>
+
+<Frame name="InnerPanel" parent="RUIOptionsFramePanelContainer">
+    <Anchors>
+        <Anchor point="TOPLEFT">
+            <Offset x="16" y="-16" />
+        </Anchor>
+        <Anchor point="BOTTOMRIGHT">
+            <Offset x="-16" y="16" />
+        </Anchor>
+    </Anchors>
+    <Layers>
+        <Layer>
+            <!-- Title -->
+            <FontString text="Retail UI Options" inherits="GameFontNormalLarge" justifyH="LEFT" justifyV="TOP" name="$parentTitle">
+                <Anchors>
+                    <Anchor point="TOPLEFT" />
+                </Anchors>
+            </FontString>
+
+            <!-- Description -->
+            <FontString text="These options allow you to toggle visuals within the interface." inherits="GameFontHighlightSmall" justifyH="LEFT" justifyV="TOP" maxLines="2" name="$parentSubText" nonspacewrap="true">
+                <Size>
+                    <AbsDimension y="32" />
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentTitle">
+                        <Offset>
+                            <AbsDimension y="-8" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </FontString>
+        </Layer>
+
+        <!-- Keybind Text - Title -->
+        <Layer>
+            <FontString text="Keybind Text" name="$parentKeybindTextTitle" inherits="GameFontNormal" justifyH="LEFT" justifyV="TOP" nonspacewrap="true">
+                <Size>
+                    <AbsDimension y="32"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentSubText">
+                        <Offset>
+                            <AbsDimension y="-108"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </FontString>
+        </Layer>
+
+        <!-- Components - Title -->
+        <Layer>
+            <FontString text="Components" inherits="GameFontNormal" justifyH="LEFT" justifyV="TOP" name="$parentComponentsTitle" nonspacewrap="true">
+                <Size>
+                    <AbsDimension y="32"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentSubText">
+                        <Offset>
+                            <AbsDimension y="-108" x="170"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </FontString>
+        </Layer>
+    </Layers>
+    <Frames>
+        <!-- Tidy Icons - Checkbox -->
+        <CheckButton name="$parentTidyIcons" inherits="InterfaceOptionsCheckButtonTemplate">
+            <Anchors>
+                <Anchor point="TOPLEFT" relativeTo="$parentSubText" relativePoint="BOTTOMLEFT">
+                    <Offset>
+                        <AbsDimension y="-1"/>
+                    </Offset>
+                </Anchor>
+            </Anchors>
+            <Scripts>
+                <OnLoad>
+                    _G[self:GetName() .. "Text"]:SetText("Tidy Icons")
+                </OnLoad>
+                <OnShow>
+                    self:SetChecked(RUI_SavedVars.Options.TidyIcons)
+                </OnShow>
+                <OnClick>
+                    local IsChecked = self:GetChecked()
+                    if IsChecked then
+                        PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
+                        RUI_SavedVars.Options.TidyIcons = true
+                    else
+                        PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF)
+                        RUI_SavedVars.Options.TidyIcons = false
+                    end
+                    RetailUI:TidyIcons_Update()
+                </OnClick>
+                <OnEnter>
+                    GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+                    GameTooltip:SetText("Tidies up the actionbar and macro button icons by trimming default icon borders.")
+                </OnEnter>
+                <OnLeave function="GameTooltip_Hide"/>
+            </Scripts>
+        </CheckButton>
+
+        <!-- Dark theme - Checkbox -->
+        <CheckButton name="$parentDarkTheme" inherits="InterfaceOptionsCheckButtonTemplate">
+            <Anchors>
+                <Anchor point="TOPLEFT" relativeTo="$parentTidyIcons" relativePoint="BOTTOMLEFT">
+                    <Offset>
+                        <AbsDimension y="-5"/>
+                    </Offset>
+                </Anchor>
+            </Anchors>
+            <Scripts>
+                <OnLoad>
+                    _G[self:GetName() .. "Text"]:SetText("Dark Theme")
+                </OnLoad>
+                <OnShow>
+                    self:SetChecked(RUI_SavedVars.Options.DarkTheme)
+                </OnShow>
+                <OnClick>
+                    local IsChecked = self:GetChecked()
+                    if IsChecked then
+                        PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
+                        RUI_SavedVars.Options.DarkTheme = true
+                    else
+                        PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF)
+                        RUI_SavedVars.Options.DarkTheme = false
+                    end
+                    RetailUI:DarkTheme_Update()
+                </OnClick>
+                <OnEnter>
+                    GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+                    GameTooltip:SetText("Toggles dark theme.")
+                </OnEnter>
+                <OnLeave function="GameTooltip_Hide"/>
+            </Scripts>
+        </CheckButton>
+
+        <!-- Experience Bar Text - Checkbox -->
+        <CheckButton name="$parentAlwaysShowExpBarText" inherits="InterfaceOptionsCheckButtonTemplate">
+            <Anchors>
+                <Anchor point="TOPLEFT" relativeTo="$parentDarkTheme" relativePoint="BOTTOMLEFT">
+                    <Offset>
+                        <AbsDimension y="-5"/>
+                    </Offset>
+                </Anchor>
+            </Anchors>
+            <Scripts>
+                <OnLoad>
+                    _G[self:GetName() .. "Text"]:SetText("Always Show Experience Bar Text |cff606060(requires reload)")
+                </OnLoad>
+                <OnShow>
+                    self:SetChecked(RUI_SavedVars.Options.AlwaysShowExpBarText)
+                </OnShow>
+                <OnClick>
+                    local IsChecked = self:GetChecked()
+                    if IsChecked then
+                        PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
+                        SetCVar("xpBarText", true)
+                        RUI_SavedVars.Options.AlwaysShowExpBarText = true
+                    else
+                        PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF)
+                        SetCVar("xpBarText", false)
+                        RUI_SavedVars.Options.AlwaysShowExpBarText = false
+                    end
+                    
+                    if RUI_SavedVars.Options.AlwaysShowExpBarText ~= SESSION_XPBARTEXT_CVAR then
+                        StaticPopup_Show("ReloadUI_Popup")
+                        -- Ensure popup is darkened if dark theme is active.
+                        RetailUI:DarkTheme_Update()
+                    else
+                        StaticPopup_Hide("ReloadUI_Popup")
+                    end
+                </OnClick>
+                <OnEnter>
+                    GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+                    GameTooltip:SetText("Always show the text on your experience bar.")
+                </OnEnter>
+                <OnLeave function="GameTooltip_Hide"/>
+            </Scripts>
+        </CheckButton>
+
+        <!-- Gryphons - Checkbox -->
+        <CheckButton name="$parentGryphons" inherits="InterfaceOptionsCheckButtonTemplate">
+            <Anchors>
+                <Anchor point="TOPLEFT" relativeTo="$parentComponentsTitle" relativePoint="BOTTOMLEFT">
+                    <Offset>
+                        <AbsDimension y="7"/>
+                    </Offset>
+                </Anchor>
+            </Anchors>
+            <Scripts>
+                <OnLoad>
+                    _G[self:GetName() .. "Text"]:SetText("Gryphons")
+                </OnLoad>
+                <OnShow>
+                    self:SetChecked(RUI_SavedVars.Options.Components.Gryphons)
+                </OnShow>
+                <OnClick>
+                    local IsChecked = self:GetChecked()
+                    if IsChecked then
+                        PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
+                        RUI_SavedVars.Options.Components.Gryphons = true
+                    else
+                        PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF)
+                        RUI_SavedVars.Options.Components.Gryphons = false
+                    end
+                    RetailUI:Gryphons_Update()
+                </OnClick>
+                <OnEnter>
+                    GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+                    GameTooltip:SetText("Toggles gryphons.")
+                </OnEnter>
+                <OnLeave function="GameTooltip_Hide"/>
+            </Scripts>
+        </CheckButton>
+
+        <!-- Bags - Checkbox -->
+        <CheckButton name="$parentBags" inherits="InterfaceOptionsCheckButtonTemplate">
+            <Anchors>
+                <Anchor point="TOPLEFT" relativeTo="$parentGryphons" relativePoint="BOTTOMLEFT">
+                    <Offset>
+                        <AbsDimension y="-5"/>
+                    </Offset>
+                </Anchor>
+            </Anchors>
+            <Scripts>
+                <OnLoad>
+                    _G[self:GetName() .. "Text"]:SetText("Bags")
+                </OnLoad>
+                <OnShow>
+                    self:SetChecked(RUI_SavedVars.Options.Components.Bags)
+                    if RUI_SavedVars.Options.Components.Bags then
+                        InnerPanelBagSpaceText:Enable()
+                        InnerPanelBagSpaceTextText:SetTextColor(1, 0.82, 0)
+                    else
+                        InnerPanelBagSpaceText:Disable()
+                        InnerPanelBagSpaceTextText:SetTextColor(0.5, 0.5, 0.5)
+                    end
+                </OnShow>
+                <OnClick>
+                    local IsChecked = self:GetChecked()
+                    if IsChecked then
+                        PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
+                        RUI_SavedVars.Options.Components.Bags = true
+                        InnerPanelBagSpaceText:Enable()
+                        InnerPanelBagSpaceTextText:SetTextColor(1, 0.82, 0)
+                    else
+                        PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF)
+                        RUI_SavedVars.Options.Components.Bags = false
+                        InnerPanelBagSpaceText:Disable()
+                        InnerPanelBagSpaceTextText:SetTextColor(0.5, 0.5, 0.5)
+                    end
+                    RetailUI:Bags_Update()
+                </OnClick>
+                <OnEnter>
+                    GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+                    GameTooltip:SetText("Toggles bags.")
+                </OnEnter>
+                <OnLeave function="GameTooltip_Hide"/>
+            </Scripts>
+        </CheckButton>
+
+        <!-- Bag Space Text- Checkbox -->
+        <CheckButton name="$parentBagSpaceText" inherits="InterfaceOptionsCheckButtonTemplate">
+            <Anchors>
+                <Anchor point="TOPLEFT" relativeTo="$parentBags" relativePoint="BOTTOMLEFT">
+                    <Offset>
+                        <AbsDimension x="16" y="-5"/>
+                    </Offset>
+                </Anchor>
+            </Anchors>
+            <Scripts>
+                <OnLoad>
+                    _G[self:GetName() .. "Text"]:SetText("Bag Space Text")
+                    _G[self:GetName() .. "Text"]:SetTextColor(1, 0.82, 0)
+                </OnLoad>
+                <OnShow>
+                    self:SetChecked(RUI_SavedVars.Options.Components.BagSpaceText)
+                </OnShow>
+                <OnClick>
+                    local IsChecked = self:GetChecked()
+                    if IsChecked then
+                        PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
+                        RUI_SavedVars.Options.Components.BagSpaceText = true
+                    else
+                        PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF)
+                        RUI_SavedVars.Options.Components.BagSpaceText = false
+                    end
+                    RetailUI:BagSpaceText_Update()
+                </OnClick>
+                <OnEnter>
+                    GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+                    GameTooltip:SetText("Toggles the bag space text.")
+                </OnEnter>
+                <OnLeave function="GameTooltip_Hide"/>
+            </Scripts>
+        </CheckButton>
+
+        <!-- Micro Menu - Checkbox -->
+        <CheckButton name="$parentMicroMenu" inherits="InterfaceOptionsCheckButtonTemplate">
+            <Anchors>
+                <Anchor point="TOPLEFT" relativeTo="$parentBagSpaceText" relativePoint="BOTTOMLEFT">
+                    <Offset>
+                        <AbsDimension x="-16" y="-5"/>
+                    </Offset>
+                </Anchor>
+            </Anchors>
+            <Scripts>
+                <OnLoad>
+                    _G[self:GetName() .. "Text"]:SetText("Micro Menu")
+                </OnLoad>
+                <OnShow>
+                    self:SetChecked(RUI_SavedVars.Options.Components.MicroMenu)
+                </OnShow>
+                <OnClick>
+                    local IsChecked = self:GetChecked()
+                    if IsChecked then
+                        PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
+                        RUI_SavedVars.Options.Components.MicroMenu = true
+                    else
+                        PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF)
+                        RUI_SavedVars.Options.Components.MicroMenu = false
+                    end
+                    RetailUI:MicroMenu_Update()
+                </OnClick>
+                <OnEnter>
+                    GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+                    GameTooltip:SetText("Toggles micro menu.")
+                </OnEnter>
+                <OnLeave function="GameTooltip_Hide"/>
+            </Scripts>
+        </CheckButton>
+
+        <!-- Micro and Bags Background - Checkbox -->
+        <CheckButton name="$parentMicroAndBagsBackground" inherits="InterfaceOptionsCheckButtonTemplate">
+            <Anchors>
+                <Anchor point="TOPLEFT" relativeTo="$parentMicroMenu" relativePoint="BOTTOMLEFT">
+                    <Offset>
+                        <AbsDimension y="-5"/>
+                    </Offset>
+                </Anchor>
+            </Anchors>
+            <Scripts>
+                <OnLoad>
+                    _G[self:GetName() .. "Text"]:SetText("Micro and Bags Background")
+                </OnLoad>
+                <OnShow>
+                    self:SetChecked(RUI_SavedVars.Options.Components.MicroAndBagsBackground)
+                </OnShow>
+                <OnClick>
+                    local IsChecked = self:GetChecked()
+                    if IsChecked then
+                        PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
+                        RUI_SavedVars.Options.Components.MicroAndBagsBackground = true
+                    else
+                        PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF)
+                        RUI_SavedVars.Options.Components.MicroAndBagsBackground = false
+                    end
+                    RetailUI:MicroAndBagsBackground_Update()
+                </OnClick>
+                <OnEnter>
+                    GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+                    GameTooltip:SetText("Toggles micro buttons and bags bar background.")
+                </OnEnter>
+                <OnLeave function="GameTooltip_Hide"/>
+            </Scripts>
+        </CheckButton>
+        
+        <!-- Keybind Text - Checkboxes -->
+        <CheckButton name="$parentKeybindTextPrimaryBar" inherits="InterfaceOptionsCheckButtonTemplate">
+            <Anchors>
+                <Anchor point="TOPLEFT" relativeTo="$parentKeybindTextTitle" relativePoint="BOTTOMLEFT">
+                    <Offset>
+                        <AbsDimension y="7"/>
+                    </Offset>
+                </Anchor>
+            </Anchors>
+            <Scripts>
+                <OnLoad>
+                    _G[self:GetName() .. "Text"]:SetText("Primary Bar")
+                </OnLoad>
+                <OnShow>
+                    self:SetChecked(RUI_SavedVars.Options.KeybindText.PrimaryBar)
+                </OnShow>
+                <OnClick>
+                    local IsChecked = self:GetChecked()
+                    if IsChecked then
+                        PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
+                        RUI_SavedVars.Options.KeybindText.PrimaryBar = true
+                    else
+                        PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF)
+                        RUI_SavedVars.Options.KeybindText.PrimaryBar = false
+                    end
+                    RetailUI:KeybindText_Update()
+                </OnClick>
+                <OnEnter>
+                    GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+                    GameTooltip:SetText("Toggles the keybind text on the primary bar.")
+                </OnEnter>
+                <OnLeave function="GameTooltip_Hide"/>
+            </Scripts>
+        </CheckButton>
+        <!-- BREAKER -->
+        <CheckButton name="$parentKeybindTextBottomLeftBar" inherits="InterfaceOptionsCheckButtonTemplate">
+            <Anchors>
+                <Anchor point="TOPLEFT" relativeTo="$parentKeybindTextPrimaryBar" relativePoint="BOTTOMLEFT">
+                    <Offset>
+                        <AbsDimension y="-5" />
+                    </Offset>
+                </Anchor>
+            </Anchors>
+            <Scripts>
+                <OnLoad>
+                    _G[self:GetName() .. "Text"]:SetText("Bottom Left Bar")
+                </OnLoad>
+                <OnShow>
+                    self:SetChecked(RUI_SavedVars.Options.KeybindText.BottomLeftBar)
+                </OnShow>
+                <OnClick>
+                    local IsChecked = self:GetChecked()
+                    if IsChecked then
+                        PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
+                        RUI_SavedVars.Options.KeybindText.BottomLeftBar = true
+                    else
+                        PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF)
+                        RUI_SavedVars.Options.KeybindText.BottomLeftBar = false
+                    end
+                    RetailUI:KeybindText_Update()
+                </OnClick>
+                <OnEnter>
+                    GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+                    GameTooltip:SetText("Toggles the keybind text on the bottom left bar.")
+                </OnEnter>
+                <OnLeave function="GameTooltip_Hide"/>
+            </Scripts>
+        </CheckButton>
+        <!-- BREAKER -->
+        <CheckButton name="$parentKeybindTextBottomRightBar" inherits="InterfaceOptionsCheckButtonTemplate">
+            <Anchors>
+                <Anchor point="TOPLEFT" relativeTo="$parentKeybindTextBottomLeftBar" relativePoint="BOTTOMLEFT">
+                    <Offset>
+                        <AbsDimension y="-5" />
+                    </Offset>
+                </Anchor>
+            </Anchors>
+            <Scripts>
+                <OnLoad>
+                    _G[self:GetName() .. "Text"]:SetText("Bottom Right Bar")
+                </OnLoad>
+                <OnShow>
+                    self:SetChecked(RUI_SavedVars.Options.KeybindText.BottomRightBar)
+                </OnShow>
+                <OnClick>
+                    local IsChecked = self:GetChecked()
+                    if IsChecked then
+                        PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
+                        RUI_SavedVars.Options.KeybindText.BottomRightBar = true
+                    else
+                        PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF)
+                        RUI_SavedVars.Options.KeybindText.BottomRightBar = false
+                    end
+                    RetailUI:KeybindText_Update()
+                </OnClick>
+                <OnEnter>
+                    GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+                    GameTooltip:SetText("Toggles the keybind text on the bottom right bar.")
+                </OnEnter>
+                <OnLeave function="GameTooltip_Hide"/>
+            </Scripts>
+        </CheckButton>
+        <!-- BREAKER -->
+        <CheckButton name="$parentKeybindTextRightBar" inherits="InterfaceOptionsCheckButtonTemplate">
+            <Anchors>
+                <Anchor point="TOPLEFT" relativeTo="$parentKeybindTextBottomRightBar" relativePoint="BOTTOMLEFT">
+                    <Offset>
+                        <AbsDimension y="-5" />
+                    </Offset>
+                </Anchor>
+            </Anchors>
+            <Scripts>
+                <OnLoad>
+                    _G[self:GetName() .. "Text"]:SetText("Right Bar")
+                </OnLoad>
+                <OnShow>
+                    self:SetChecked(RUI_SavedVars.Options.KeybindText.RightBar)
+                </OnShow>
+                <OnClick>
+                    local IsChecked = self:GetChecked()
+                    if IsChecked then
+                        PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
+                        RUI_SavedVars.Options.KeybindText.RightBar = true
+                    else
+                        PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF)
+                        RUI_SavedVars.Options.KeybindText.RightBar = false
+                    end
+                    RetailUI:KeybindText_Update()
+                </OnClick>
+                <OnEnter>
+                    GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+                    GameTooltip:SetText("Toggles the keybind text on the right bar.")
+                </OnEnter>
+                <OnLeave function="GameTooltip_Hide"/>
+            </Scripts>
+        </CheckButton>
+        <!-- BREAKER -->
+        <CheckButton name="$parentKeybindTextRightBar2" inherits="InterfaceOptionsCheckButtonTemplate">
+            <Anchors>
+                <Anchor point="TOPLEFT" relativeTo="$parentKeybindTextRightBar" relativePoint="BOTTOMLEFT">
+                    <Offset>
+                        <AbsDimension y="-5" />
+                    </Offset>
+                </Anchor>
+            </Anchors>
+            <Scripts>
+                <OnLoad>
+                    _G[self:GetName() .. "Text"]:SetText("Right Bar 2")
+                </OnLoad>
+                <OnShow>
+                    self:SetChecked(RUI_SavedVars.Options.KeybindText.RightBar2)
+                </OnShow>
+                <OnClick>
+                    local IsChecked = self:GetChecked()
+                    if IsChecked then
+                        PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
+                        RUI_SavedVars.Options.KeybindText.RightBar2 = true
+                    else
+                        PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF)
+                        RUI_SavedVars.Options.KeybindText.RightBar2 = false
+                    end
+                    RetailUI:KeybindText_Update()
+                </OnClick>
+                <OnEnter>
+                    GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+                    GameTooltip:SetText("Toggles the keybind text on the right bar 2.")
+                </OnEnter>
+                <OnLeave function="GameTooltip_Hide"/>
+            </Scripts>
+        </CheckButton>
+        
+        <!-- Restore default options - Button -->
+        <Button name="$parentRestoreDefaults" text="Restore default options" inherits="UIPanelButtonTemplate">
+            <Size>
+                <AbsDimension x="374" y="22"/>
+            </Size>
+            <Anchors>
+                <Anchor point="BOTTOMRIGHT"/>
+            </Anchors>
+            <Scripts>
+                <OnClick>
+                    StaticPopup_Show("RestoreDefaults_Popup")
+                </OnClick>
+            </Scripts>
+        </Button>
+    </Frames>
+</Frame>
+
+</Ui>

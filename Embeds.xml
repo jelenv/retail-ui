@@ -1,0 +1,24 @@
+<Ui>
+
+  <!-- Initialization -->
+  <Include file="Init.lua" />
+
+  <!-- Art -->
+  <Include file="Art\ArtFrames.xml" />
+
+  <!-- Modules -->
+  <Script file="Modules\DarkTheme\Textures.lua" />
+  <Script file="Modules\DarkTheme\DarkTheme.lua" />
+  <Script file="Modules\Components.lua" />
+  <Script file="Modules\KeybindText.lua" />
+  <Script file="Modules\TidyIcons.lua" />
+
+  <!-- Options -->
+  <Include file="Options\OptionsFrame.xml" />
+  <Include file="Options\OptionsFramePanels.xml" />
+  <Include file="Options\Options.lua" />
+
+  <!-- Saved variables -->
+  <Script file="SavedVariables.lua" />
+
+</Ui>
