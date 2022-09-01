@@ -195,7 +195,7 @@ local function Initial_ActionBarPositioning()
 		for i = 0, 3 do
 			local bagFrame, previousBag = _G["CharacterBag" .. i .. "Slot"], _G["CharacterBag" .. i-1 .. "Slot"]
 	
-			bagFrame:SetScale(0.75)
+			bagFrame:SetScale(0.85)
 			bagFrame:ClearAllPoints()
 	
 			if i == 0 then
@@ -206,7 +206,7 @@ local function Initial_ActionBarPositioning()
 		end
 
 		-- Key ring Scale and Position
-		KeyRingButton:SetScale(0.9)
+		KeyRingButton:SetScale(0.80)
 		KeyRingButton:SetPoint("RIGHT", CharacterBag3Slot, "LEFT", -5, -2)
 
 		-- Pet bar texture Position (Visibility when bottom left bar is hidden)
