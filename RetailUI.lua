@@ -104,7 +104,7 @@ local function Position_MicroMenuButtons()
 		button:ClearAllPoints()
 
 		if i == 1 then
-			button:SetPoint("BOTTOMRIGHT", UIParent, -197, 3.5)
+			button:SetPoint("BOTTOMRIGHT", UIParent, -251.5, 3.3)
 		else
 			button:SetPoint("BOTTOMRIGHT", previousButton, 27.5, 0)
 		end
