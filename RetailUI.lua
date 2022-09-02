@@ -114,9 +114,12 @@ local function Position_MicroMenuButtons()
 	MainMenuBarPerformanceBarFrame:SetFrameStrata("HIGH")
 	MainMenuBarPerformanceBarFrame:SetScale((HelpMicroButton:GetWidth() / MainMenuBarPerformanceBarFrame:GetWidth()) * (1 / 3))
 
+	MainMenuBarPerformanceBar:SetWidth(8)
+	MainMenuBarPerformanceBar:SetHeight(MainMenuBarPerformanceBar:GetHeight()-3)
 	MainMenuBarPerformanceBar:SetRotation(math.pi * 0.5)
+	
 	MainMenuBarPerformanceBar:ClearAllPoints()
-	MainMenuBarPerformanceBar:SetPoint("BOTTOM", HelpMicroButton, -1, -24)
+	MainMenuBarPerformanceBar:SetPoint("BOTTOM", HelpMicroButton, HelpMicroButton:GetWidth()/2 - 3, -18)
 
 	MainMenuBarPerformanceBarFrameButton:ClearAllPoints()
 	MainMenuBarPerformanceBarFrameButton:SetPoint("BOTTOMLEFT", MainMenuBarPerformanceBar, -(MainMenuBarPerformanceBar:GetWidth() / 2), 0)
