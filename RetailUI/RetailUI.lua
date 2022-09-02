@@ -115,7 +115,7 @@ local function Position_MicroMenuButtons()
 	MainMenuBarPerformanceBarFrame:SetScale((HelpMicroButton:GetWidth() / MainMenuBarPerformanceBarFrame:GetWidth()) * (1 / 3))
 
 	MainMenuBarPerformanceBar:SetWidth(8)
-	MainMenuBarPerformanceBar:SetHeight(MainMenuBarPerformanceBar:GetHeight()-3)
+	MainMenuBarPerformanceBar:SetHeight(58)
 	MainMenuBarPerformanceBar:SetRotation(math.pi * 0.5)
 	
 	MainMenuBarPerformanceBar:ClearAllPoints()
