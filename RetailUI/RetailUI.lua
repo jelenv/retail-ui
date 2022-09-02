@@ -119,7 +119,7 @@ local function Position_MicroMenuButtons()
 	MainMenuBarPerformanceBar:SetRotation(math.pi * 0.5)
 	
 	MainMenuBarPerformanceBar:ClearAllPoints()
-	MainMenuBarPerformanceBar:SetPoint("BOTTOM", HelpMicroButton, HelpMicroButton:GetWidth()/2 - 3, -18)
+	MainMenuBarPerformanceBar:SetPoint("BOTTOMRIGHT", UIParent, -16, -13)
 
 	MainMenuBarPerformanceBarFrameButton:ClearAllPoints()
 	MainMenuBarPerformanceBarFrameButton:SetPoint("BOTTOMLEFT", MainMenuBarPerformanceBar, -(MainMenuBarPerformanceBar:GetWidth() / 2), 0)
