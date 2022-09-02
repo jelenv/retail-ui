@@ -89,7 +89,7 @@
     </Anchors>
     <Layers>
         <Layer level="BACKGROUND">
-            <Texture name="$parentTexture" file="Interface/AddOns/RetailUI/art/MicroMenuArt"/>
+            <Texture name="$parentTexture" file="Interface/AddOns/RetailUI/Art/MicroMenuArt"/>
         </Layer>
     </Layers>
 </Frame>
