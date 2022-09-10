@@ -228,6 +228,9 @@
                 <OnLoad>
                     _G[self:GetName() .. "Text"]:SetText("Bags")
                 </OnLoad>
+                <OnShow>
+                    self:SetChecked(RUI_SavedVars.Options.Components.Bags) 
+                </OnShow>
                 <OnClick>
                     local IsChecked = self:GetChecked()
                     if IsChecked then
