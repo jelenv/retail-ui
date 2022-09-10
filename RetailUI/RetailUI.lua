@@ -132,37 +132,6 @@ hooksecurefunc("MoveMicroButtons", MicroMenu_Hook)
 hooksecurefunc("UpdateMicroButtons", MicroMenu_Hook)
 hooksecurefunc("MainMenuBarVehicleLeaveButton_Update", MicroMenu_Hook)
 
-
-
---------------------------------==≡≡[ BAG SPACE TEXT ]≡≡==--------------------------------
-
-local BagSpaceDisplay = CreateFrame("Frame", "BagSpaceDisplay", MainMenuBarBackpackButton)
-
-BagSpaceDisplay:ClearAllPoints()
-BagSpaceDisplay:SetPoint("BOTTOM", MainMenuBarBackpackButton, 0, -8)
-BagSpaceDisplay:SetSize(MainMenuBarBackpackButton:GetWidth(), MainMenuBarBackpackButton:GetHeight())
-
-BagSpaceDisplay.Text = BagSpaceDisplay:CreateFontString(nil, "OVERLAY", "NumberFontNormal")
-BagSpaceDisplay.Text:SetAllPoints(BagSpaceDisplay)
-
-local function UpdateBagSpace()
-	local totalFree, freeSlots, bagFamily = 0
-	for i = BACKPACK_CONTAINER, NUM_BAG_SLOTS do
-		freeSlots, bagFamily = GetContainerNumFreeSlots(i)
-		if bagFamily == 0 then
-			totalFree = totalFree + freeSlots
-		end
-	end
-
-	BagSpaceDisplay.Text:SetText(string.format("(%s)", totalFree))
-end
-
-local f = CreateFrame("Frame")
-f:RegisterEvent("BAG_UPDATE")
-f:SetScript("OnEvent", UpdateBagSpace)
-
-
-
 --------------------==≡≡[ ACTIONBARS/BUTTONS POSITIONING AND SCALING ]≡≡==-----------------------------------
 
 -- Only needs to be run once, or when leaving combat.
@@ -547,7 +516,6 @@ local function PlayerLogin()
 	HideDefaultBlizzardArt()
 	Initial_ActionBarPositioning()
 	Update_ActionBars()
-	UpdateBagSpace()
 end
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_LOGIN")

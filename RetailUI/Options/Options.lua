@@ -37,7 +37,6 @@ StaticPopupDialogs["RestoreDefaults_Popup"] = {
 		-- Components
 		Restore_DefaultState(InnerPanelGryphons, true)
 		Restore_DefaultState(InnerPanelBags, true)
-		Restore_DefaultState(InnerPanelBagSpaceText, true)
 		Restore_DefaultState(InnerPanelMicroMenu, true)
 		Restore_DefaultState(InnerPanelMicroAndBagsBackground, true)
 	end,

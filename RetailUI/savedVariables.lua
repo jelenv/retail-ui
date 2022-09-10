@@ -44,7 +44,6 @@ local function SavedVariables_Create()
 	-- 	["Components"] = {
 	-- 		["Gryphons"] = true,
 	-- 		["Bags"] = true,
-	--		["BagSpaceText"] = true,
 	-- 		["MicroMenu"] = true,
 	-- 		["MicroAndBagsBackground"] = true,
 	-- 	}
@@ -63,7 +62,6 @@ local function SavedVariables_Create()
 	AddToOptions("Components", {})
 	AddToComponents("Gryphons", true)
 	AddToComponents("Bags", true)
-	AddToComponents("BagSpaceText", true)
 	AddToComponents("MicroMenu", true)
 	AddToComponents("MicroAndBagsBackground", true)
 end
@@ -79,7 +77,6 @@ local function SavedVariables_Init()
 		RetailUI:DarkTheme_Update()
 		RetailUI:Gryphons_Update()
 		RetailUI:Bags_Update()
-		RetailUI:BagSpaceText_Update()
 		RetailUI:MicroMenu_Update()
 		RetailUI:MicroAndBagsBackground_Update()
 	else

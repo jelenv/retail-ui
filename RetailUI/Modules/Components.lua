@@ -32,14 +32,6 @@ local function Bags_Update()
 	Update_KeyRing()
 end
 
-local function BagSpaceText_Update()
-	if RUI_SavedVars.Options.Components.BagSpaceText then
-		BagSpaceDisplay:Show()
-	else
-		BagSpaceDisplay:Hide()
-	end
-end
-
 local function MicroMenu_Update()
 	if RUI_SavedVars.Options.Components.MicroMenu then
 		for i = 1, #MICRO_BUTTONS do
@@ -64,6 +56,5 @@ end
 
 RetailUI.Gryphons_Update = Gryphons_Update
 RetailUI.Bags_Update = Bags_Update
-RetailUI.BagSpaceText_Update = BagSpaceText_Update
 RetailUI.MicroMenu_Update = MicroMenu_Update
 RetailUI.MicroAndBagsBackground_Update = MicroAndBagsBackground_Update
