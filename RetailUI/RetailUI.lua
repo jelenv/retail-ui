@@ -111,15 +111,14 @@ local function Position_MicroMenuButtons()
 	end
 
 	-- Latency indicator
-	MainMenuBarPerformanceBarFrame:SetFrameStrata("HIGH")
-	MainMenuBarPerformanceBarFrame:SetScale((HelpMicroButton:GetWidth() / MainMenuBarPerformanceBarFrame:GetWidth()) * (1 / 3))
+	MainMenuBarPerformanceBarFrame:Hide()
 
-	MainMenuBarPerformanceBar:SetWidth(8)
-	MainMenuBarPerformanceBar:SetHeight(58)
 	MainMenuBarPerformanceBar:SetRotation(math.pi * 0.5)
-	
+	MainMenuBarPerformanceBar:SetWidth(3)
+	MainMenuBarPerformanceBar:SetHeight(33)
+
 	MainMenuBarPerformanceBar:ClearAllPoints()
-	MainMenuBarPerformanceBar:SetPoint("BOTTOMRIGHT", UIParent, -16, -13)
+	MainMenuBarPerformanceBar:SetPoint("BOTTOMRIGHT", UIParent, -10, -8)
 
 	MainMenuBarPerformanceBarFrameButton:ClearAllPoints()
 	MainMenuBarPerformanceBarFrameButton:SetPoint("BOTTOMLEFT", MainMenuBarPerformanceBar, -(MainMenuBarPerformanceBar:GetWidth() / 2), 0)
