@@ -37,12 +37,12 @@ local function MicroMenu_Update()
 		for i = 1, #MICRO_BUTTONS do
 			_G[MICRO_BUTTONS[i]]:Show()
 		end
-		MainMenuBarPerformanceBarFrame:Show()
+		-- MainMenuBarPerformanceBarFrame:Show()
 	else
 		for i = 1, #MICRO_BUTTONS do
 			_G[MICRO_BUTTONS[i]]:Hide()
 		end
-		MainMenuBarPerformanceBarFrame:Hide()
+		-- MainMenuBarPerformanceBarFrame:Hide()
 	end
 end
 
