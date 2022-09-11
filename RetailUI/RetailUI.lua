@@ -235,13 +235,29 @@ end
 
 local function Update_ActionBars()
 	if not InCombatLockdown() then
+		local petBar = {x=36, y=2}
+		local stanceBar = {x=21, y=41}
+
 		if MultiBarBottomLeft:IsShown() then
-			PetActionButton1:SetPoint("BOTTOMLEFT", PetActionButton1:GetParent(), "BOTTOMLEFT", 36, 2)
-			StanceBarFrame:SetPoint("BOTTOMLEFT", MainMenuBar, "TOPLEFT", 21, 41)
+			if StanceBarFrame:IsShown() then
+				petBar.x = -225
+				if not MultiBarBottomRight:IsShown() then
+					petBar.x = -510
+				end
+			end
 		else
-			PetActionButton1:SetPoint("BOTTOMLEFT", PetActionButton1:GetParent(), "BOTTOMLEFT", 36, -2)
-			StanceBarFrame:SetPoint("BOTTOMLEFT", MainMenuBar, "TOPLEFT", 30, -5)
+			petBar.y = -2
+			stanceBar.x = 30
+			stanceBar.y = -5
+			if StanceBarFrame:IsShown() and not MultiBarBottomRight:IsShown() then
+				petBar.x = -510
+				SlidingActionBarTexture0:SetAlpha(0)
+				SlidingActionBarTexture1:SetAlpha(0)
+			end
 		end
+
+		PetActionButton1:SetPoint("BOTTOMLEFT", PetActionButton1:GetParent(), "BOTTOMLEFT", petBar.x, petBar.y)
+		StanceBarFrame:SetPoint("BOTTOMLEFT", MainMenuBar, "TOPLEFT", stanceBar.x, stanceBar.y)
 
 		if MultiBarBottomRight:IsShown() then
 			ActivateLongBar()
