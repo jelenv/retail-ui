@@ -7,3 +7,8 @@ All credit goes to the original author [sebast_ian](https://www.curseforge.com/m
 
 ## Slash Commands
 Type `/rui`, `/retail`, or `/retailui` to toggle the options menu
+
+## Known issues
+- Sometimes action bars "drop down" and stay misaligned
+  - **Workaround:** Happens together with Titan Panel Classic addon. In Titan settings turn off any Bottom Bars and also turn on "Disable Screen Adjust" for bottom bars.
+- As a shadow priest, when using Mind Control. The Mind Control bar has bad position in some cases.
