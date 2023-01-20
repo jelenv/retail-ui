@@ -1,4 +1,6 @@
 # Retail UI (Community)
+❗**Currently not maintained anymore, you are welcome to fork it or create pull requests**❗
+
 World of Warcraft Retail's UI, recreated for Classic. Includes additional features.
 
 ### The Repository
